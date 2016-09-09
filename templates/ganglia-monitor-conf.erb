@@ -1,0 +1,28 @@
+/*
+	 PUPPET MANAGED
+*/
+globals {
+    daemonize = yes
+    setuid = yes
+    user = <%= scope['ganglia::params::user'] %>
+    debug_level = 0
+    #max_udp_msg_len = 1500
+    mute = no
+    deaf = <%= @deaf %>
+    allow_extra_data = yes
+    host_dmax = 99000 /*secs */
+    cleanup_threshold = 5600 /*secs */ 
+    gexec = no
+    send_metadata_interval = 15
+} 
+
+/* The host section describes attributes of the host, like the location */ 
+host {
+    location = ""
+} 
+
+<% if @includes == true -%>
+/* Include all snipplets */
+include ("<%= scope['ganglia::params::mconf_dir'] %>/conf.d/*.conf")
+<% end -%>
+

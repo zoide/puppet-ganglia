@@ -1,0 +1,11 @@
+## PUPPET MANAGED  #####
+udp_send_channel { 
+    <% if @multicast != false -%>
+    bind       = <%= @multicast %>
+    mcast_join = <%= @multicast %>
+    <% else -%>
+    host       = <%= @metaserver %>
+    <% end -%>
+    port       = <%= @port %>  
+    ttl        = 1
+}

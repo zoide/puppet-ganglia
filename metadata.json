@@ -1,0 +1,13 @@
+{
+  "author": "Udo Waechter",
+  "dependencies": [],
+  "license": "GPLv2",
+  "name": "zoide-ganglia",
+  "operatingsystem_support": ["Debian"],
+  "project_page": "",
+  "requirements": [],
+  "source": "",
+  "summary": "",
+  "tags": [],
+  "version": "1.1.0"
+}

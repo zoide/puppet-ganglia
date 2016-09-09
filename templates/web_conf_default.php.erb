@@ -1,0 +1,62 @@
+<?php
+# 'readonly': No authentication is required.  All users may view all resources.  No edits are allowed.
+#  'enabled': Guest users may view public clusters.  Login is required to make changes.  
+#             An administrator must configure an authentication scheme and ACL rules.
+# 'disabled': Guest users may perform any actions, including edits.  No authentication is required.
+$conf['auth_system'] = '<%= @auth_system %>';
+
+<% if @rrdcached_socket != false -%>
+
+# If rrdcached is being used, this argument must specify the 
+# socket to use.
+#
+# ganglia-web only requires, and should use, the low-privilege socket
+# created with the -L option to rrdcached.  gmetad requires, and must use,
+# the fully privileged socket created with the -l option to rrdcached.
+#   $conf['rrdcached_socket'] = "unix:/var/run/rrdcached.limited.sock";
+$conf['rrdcached_socket'] = "<%= @rrdcached_socket %>";
+
+<% end -%>
+
+#
+# In the Cluster View this sets the default number of columns used to
+# display the host grid below the summary graphs.
+#
+$conf['hostcols'] = <%= @hostcols %>;
+
+#
+# In the Host View this sets the default number of columns used to
+# display the metric grid below the summary graphs.
+#
+$conf['metriccols'] = <%= @metriccols %>;
+
+
+#
+# remove the domainname from the FQDN hostnames in graphs
+# (to help with long hostnames in small charts)
+#
+$conf['strip_domainname'] = <%= @strip_domainname %>;
+
+$conf['time_ranges'] = array(
+   'hour'=>3600,
+   '2hr'=>7200,
+   '4hr'=>14400,
+   '8hr'=>28800,
+   'day'=>86400,
+   'week'=>604800,
+   'month'=>2419200,
+   'year'=>31449600,
+   # Needs to be an entry here to support 'r=job' in the query args to graph.php
+   'job'=>0
+);
+  
+#$conf['optional_graphs'] = array('packet');
+<% if @memcached != false -%>
+$conf['memcached_servers'] = array ( '<%= @memcached %>' );
+<% end -%>
+
+# Metrics autocompletion picker. This loads all metrics asynchronously
+# during search, rather than pre-loading at page load.
+$conf['picker_autocomplete'] = true;
+
+?>

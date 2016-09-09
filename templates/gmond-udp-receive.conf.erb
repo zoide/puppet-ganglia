@@ -1,0 +1,31 @@
+## PUPPET MANAGED  #####
+udp_recv_channel { 
+    <% if @multicast != false -%>
+    bind       = <%= @multicast %>
+    mcast_join = <%= @multicast %>
+    <% else -%>
+    bind       = <%= @bind %>
+    <% end -%>
+    port       = <%= @port %> 
+}
+tcp_accept_channel { 
+    port       = <%= @port %>
+}
+<% if @sflow_host != false or @sflow_port != false -%>
+## sFlow receiver, we are!
+udp_recv_channel {
+  <% if @sflow_host != false -%>
+  bind = <%= @sflow_host %>
+  <% end -%>
+  <% if @sflow_port != false -%>
+  port = <%= @sflow_port %>
+  <% end -%>
+}
+/* Enable virtual machine statistics */
+sflow {
+  accept_vm_metrics = yes
+  <% if @sflow_port != false -%>
+  udp_port = <%= @sflow_port %>
+  <% end -%>
+}
+<% end -%>
