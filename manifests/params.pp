@@ -25,5 +25,5 @@ class ganglia::params {
     default   => 'ganglia-monitor',
   }
   $conf_d = "${mconf_dir}/conf.d"
-  $git_mods = "{::puppet_vardir}/exported/gmond-python-modules-git"
+  $git_mods = "${::puppet_vardir}/exported/gmond-python-modules-git"
 }

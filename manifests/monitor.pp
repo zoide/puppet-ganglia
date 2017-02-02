@@ -111,7 +111,6 @@ class ganglia::monitor (
   service { $ganglia::params::gmond:
     ensure    => $enabled,
     enable    => $enabled,
-    hasstatus => false,
     pattern   => '/usr/sbin/gmond',
   }
 
